@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+## install.sh for CentOS-7
 #epel
 wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
