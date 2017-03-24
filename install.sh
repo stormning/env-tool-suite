@@ -24,8 +24,18 @@ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compo
 chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+#lrzsz
+sudo yum install -y lrzsz
+
 #git
 sudo yum install -y git
 
 #nodejs
 yum -y install nodejs npm --enablerepo=epel
+
+#qiniu for backup
+#http://zhangge.net/4221.html
+#TODO conf.json
+curl -L http://devtools.qiniu.io/qiniu-devtools-linux_amd64-current.tar.gz -o /opt/bin
+tar cvf /opt/bin/qiniu-devtools-linux_amd64-current.tar.gz
+rm -fr /opt/bin/qiniu-devtools-linux_amd64-current.tar.gz
