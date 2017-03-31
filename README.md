@@ -15,7 +15,7 @@
     * nexus 代码仓库
     * jira 项目管理事务跟踪
     * confluence 团队协同与知识管理
-    * stash 企业级Git代码库 （source tree?）
+    * stash 企业级Git代码库 （gitlab ?）
     * fisheye 源码深度查看
     * crucible 代码评审工具
     * bamboo 持续集成服务器
