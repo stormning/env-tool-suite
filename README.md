@@ -3,7 +3,7 @@
 * docker-compose
 * git
 * nodejs
-* supervsor
+* supervisor
 
 # docker镜像
 * 基本镜像
