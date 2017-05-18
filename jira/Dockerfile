@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
@@ -55,7 +55,7 @@ EXPOSE 8080
 VOLUME ["${JIRA_HOME}", "${JIRA_INSTALL}/logs"]
 
 # Set the default working directory as the installation directory.
-WORKDIR /var/atlassian/jira
+WORKDIR ${JIRA_INSTALL}
 
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
