@@ -2,15 +2,19 @@ FROM openjdk:8
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.3.3
+ENV JIRA_WEB_LIB  ${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib
+ENV JIRA_VERSION  7.3.6
 
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 
-ADD atlassian-jira-software-7.3.3.tar.gz /${JIRA_INSTALL}
-ADD mysql-connector-java-5.1.39.jar /${JIRA_INSTALL}/lib
+ADD atlassian-jira-software-${JIRA_VERSION}.tar ${JIRA_INSTALL}
+
+#use mysql
+COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}
 
 #jira crack
+COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}
 
 
 RUN set -x \

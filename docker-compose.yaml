@@ -10,7 +10,7 @@ services:
       - /opt/nginx/conf.d:/etc/nginx/conf.d
 
   bamboo:
-    image: docker.slyak.com/bamboo
+    image: hub.slyak.com/bamboo
     ports:
       - 8081:8080
     links:
@@ -19,7 +19,7 @@ services:
 
   clover:
   confluence:
-    image: docker.slyak.com/bamboo
+    image: hub.slyak.com/bamboo
     ports:
       - 8080:8080
     links:
@@ -30,3 +30,4 @@ services:
   fisheye:
   jira:
   stash:
+  nexus:

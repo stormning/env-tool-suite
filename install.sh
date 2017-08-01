@@ -11,9 +11,9 @@ sudo yum install -y lrzsz git
 sudo yum install -y git
 
 #nodejs
-sudo yum -y install nodejs npm --enablerepo=epel
+sudo yum install -y nodejs npm --enablerepo=epel
 
-#epel
+#add epel repo
 wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
 
