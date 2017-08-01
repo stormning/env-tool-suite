@@ -8,21 +8,24 @@ ENV JIRA_VERSION  7.3.6
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 
-ADD atlassian-jira-software-${JIRA_VERSION}.tar ${JIRA_INSTALL}
+ADD atlassian-jira-software-${JIRA_VERSION}.tar /
+RUN mkdir -p /opt/atlassian \
+    && mv /atlassian-jira-software-${JIRA_VERSION}-standalone ${JIRA_INSTALL}
 
 #use mysql
-COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}
+COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 
 #jira crack
-COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}
+COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
 
 RUN set -x \
+    && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
     && apt-get update --quiet \
     && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
     && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
-    && apt-get clean \
-    && mkdir -p                "${JIRA_HOME}" \
+    && apt-get clean
+RUN mkdir -p                   "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
     && chmod -R 700            "${JIRA_HOME}" \
     && chown -R daemon:daemon  "${JIRA_HOME}" \
@@ -35,6 +38,7 @@ RUN set -x \
     && chmod -R 700            "${JIRA_INSTALL}/logs" \
     && chmod -R 700            "${JIRA_INSTALL}/temp" \
     && chmod -R 700            "${JIRA_INSTALL}/work" \
+    && chmod 700               "${JIRA_INSTALL}/bin/check-java.sh" \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/conf" \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/logs" \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/temp" \
@@ -65,4 +69,4 @@ COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian JIRA as a foreground process by default.
-CMD ["/${JIRA_INSTALL}/catalina.sh", "run"]
+CMD ["/opt/atlassian/jira/bin/catalina.sh", "run"]
