@@ -4,7 +4,7 @@ FROM openjdk:8
 ENV BITBUCKET_HOME     /var/atlassian/bitbucket
 ENV BITBUCKET_INSTALL  /opt/atlassian/bitbucket
 ENV BITBUCKET_VERSION  4.10.1
-ENV BITBUCKET_WEB_LIB  ${JIRA_INSTALL}/atlassian-bitbucket/WEB-INF/lib
+ENV BITBUCKET_WEB_LIB  ${BITBUCKET_INSTALL}/atlassian-bitbucket/WEB-INF/lib
 
 # Install Atlassian Bitbucket and helper tools and setup initial home
 # directory structure.
@@ -16,7 +16,7 @@ RUN mkdir -p /opt/atlassian \
 #use mysql
 COPY mysql-connector-java-5.1.39.jar ${BITBUCKET_WEB_LIB}/
 
-#jira crack
+#crack
 COPY atlassian-extras-decoder-v2-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-legacy-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 
