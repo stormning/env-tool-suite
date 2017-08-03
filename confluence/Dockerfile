@@ -3,7 +3,7 @@ FROM openjdk:8
 # Setup useful environment variables
 ENV CONF_HOME     /var/atlassian/confluence
 ENV CONF_INSTALL  /opt/atlassian/confluence
-ENV CONF_WEB_LIB  ${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib
+ENV CONF_WEB_LIB  ${JIRA_INSTALL}/confluence/WEB-INF/lib
 ENV CONF_VERSION  6.3.1
 
 ENV JAVA_CACERTS  $JAVA_HOME/jre/lib/security/cacerts

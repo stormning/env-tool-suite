@@ -21,3 +21,4 @@
     * bamboo 持续集成服务器
     * clover 测试代码覆盖率分析
     * crowd 单点登录与认证管理
+    * shipyard docker镜像和容器管理
