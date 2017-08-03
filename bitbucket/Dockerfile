@@ -20,6 +20,9 @@ COPY mysql-connector-java-5.1.39.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-decoder-v2-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-legacy-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 
+#language
+COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_INSTALL}/atlassian-bitbucket/WEB-INF/atlassian-bundled-plugins/
+
 
 RUN set -x \
     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
