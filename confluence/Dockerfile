@@ -3,8 +3,9 @@ FROM openjdk:8
 # Setup useful environment variables
 ENV CONF_HOME     /var/atlassian/confluence
 ENV CONF_INSTALL  /opt/atlassian/confluence
-ENV CONF_WEB_LIB  ${JIRA_INSTALL}/confluence/WEB-INF/lib
-ENV CONF_VERSION  6.3.1
+ENV CONF_WEB      ${CONF_INSTALL}/confluence/WEB-INF
+ENV CONF_WEB_LIB  ${CONF_WEB}/lib
+ENV CONF_VERSION  6.2.1
 
 ENV JAVA_CACERTS  $JAVA_HOME/jre/lib/security/cacerts
 ENV CERTIFICATE   $CONF_HOME/certificate
@@ -20,6 +21,8 @@ COPY mysql-connector-java-5.1.39.jar ${CONF_WEB_LIB}/
 
 #conf crack
 COPY atlassian-extras-decoder-v2-3.2.jar ${CONF_WEB_LIB}/
+RUN  rm "${CONF_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
+COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${CONF_WEB}/atlassian-bundled-plugins/
 
 RUN set -x \
     && apt-get update --quiet \

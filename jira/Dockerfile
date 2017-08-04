@@ -18,6 +18,8 @@ COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 #jira crack
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
+#TODO plugins crack : atlassian-universal-plugin-manager-plugin-xxx.jar
+
 
 RUN set -x \
     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
