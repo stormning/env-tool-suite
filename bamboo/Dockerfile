@@ -26,7 +26,7 @@ RUN set -x \
     && apt-get install --quiet --yes --no-install-recommends git-lfs \
     && git lfs install \
     && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
-    && apt-get clean \
+    && apt-get clean
 RUN rm -rf /var/lib/apt/lists/* \
     && mkdir -p               "${BAMBOO_HOME}/lib" \
     && chmod -R 700           "${BAMBOO_HOME}" \
