@@ -16,6 +16,9 @@ RUN mkdir -p /opt/atlassian \
 #crack
 COPY atlassian-extras-2.5.jar ${FISHEYE_INST}/lib/
 
+#mysql
+COPY mysql-connector-java-5.1.39.jar ${FISHEYE_INST}/lib/
+
 
 RUN groupadd -r $GID \
     && useradd -r --create-home --home-dir $FISHEYE_INST --groups $GID --shell /bin/bash $UID
