@@ -21,7 +21,7 @@ COPY mysql-connector-java-5.1.39.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-decoder-v2-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-legacy-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 
-RUN  rm "${BITBUCKET_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
+RUN  rm "${BITBUCKET_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.21.3.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
 
 #language
