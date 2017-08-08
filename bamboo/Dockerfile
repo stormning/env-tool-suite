@@ -3,7 +3,8 @@ FROM openjdk:8
 # Setup useful environment variables
 ENV BAMBOO_HOME     /var/atlassian/bamboo
 ENV BAMBOO_INSTALL  /opt/atlassian/bamboo
-ENV BAMBOO_WEB_LIB  ${BAMBOO_INSTALL}/atlassian-bamboo/WEB-INF/lib
+ENV BAMBOO_WEB      ${BAMBOO_INSTALL}/atlassian-bamboo/WEB-INF
+ENV BAMBOO_WEB_LIB  ${BAMBOO_WEB}/lib
 ENV BAMBOO_VERSION  6.1.0
 
 # Install Atlassian Bamboo and helper tools and setup initial home
@@ -15,8 +16,12 @@ RUN mkdir -p /opt/atlassian \
 #use mysql
 COPY mysql-connector-java-5.1.39.jar ${BAMBOO_WEB_LIB}/
 
-#bamboo crack
-COPY atlassian-extras-3.2.jar ${BAMBOO_WEB_LIB}/
+#crack
+COPY atlassian-extras-decoder-v2-3.3.0.jar ${BAMBOO_WEB_LIB}/
+COPY atlassian-extras-legacy-3.3.0.jar ${BAMBOO_WEB_LIB}/
+
+RUN  rm "${BAMBOO_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
+COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BAMBOO_WEB}/atlassian-bundled-plugins/
 
 RUN set -x \
     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \

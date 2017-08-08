@@ -3,8 +3,9 @@ FROM openjdk:8
 # Setup useful environment variables
 ENV BITBUCKET_HOME     /var/atlassian/bitbucket
 ENV BITBUCKET_INSTALL  /opt/atlassian/bitbucket
+ENV BITBUCKET_WEB      ${BITBUCKET_INSTALL}/atlassian-bitbucket/WEB-INF
+ENV BITBUCKET_WEB_LIB  ${BITBUCKET_WEB}/lib
 ENV BITBUCKET_VERSION  4.10.1
-ENV BITBUCKET_WEB_LIB  ${BITBUCKET_INSTALL}/atlassian-bitbucket/WEB-INF/lib
 
 # Install Atlassian Bitbucket and helper tools and setup initial home
 # directory structure.
@@ -20,10 +21,11 @@ COPY mysql-connector-java-5.1.39.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-decoder-v2-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 COPY atlassian-extras-legacy-3.3.0.jar ${BITBUCKET_WEB_LIB}/
 
-#TODO plugins crack : atlassian-universal-plugin-manager-plugin-xxx.jar
+RUN  rm "${BITBUCKET_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
+COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
 
 #language
-COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_INSTALL}/atlassian-bitbucket/WEB-INF/atlassian-bundled-plugins/
+COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
 
 RUN set -x \
     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \

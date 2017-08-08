@@ -2,7 +2,8 @@ FROM openjdk:8
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_WEB_LIB  ${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib
+ENV JIRA_WEB      ${JIRA_INSTALL}/atlassian-jira/WEB-INF
+ENV JIRA_WEB_LIB  ${JIRA_WEB}/lib
 ENV JIRA_VERSION  7.3.6
 
 # Install Atlassian JIRA and helper tools and setup initial home
@@ -19,7 +20,8 @@ COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
 #TODO plugins crack : atlassian-universal-plugin-manager-plugin-xxx.jar
-
+RUN  rm "${JIRA_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.21.jar"
+COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${JIRA_WEB}/atlassian-bundled-plugins/
 
 RUN set -x \
     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
