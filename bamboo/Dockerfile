@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM hub.slyak.com/common
 
 # Setup useful environment variables
 ENV BAMBOO_HOME     /var/atlassian/bamboo

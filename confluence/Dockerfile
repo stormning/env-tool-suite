@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM hub.slyak.com/common
 
 # Setup useful environment variables
 ENV CONF_HOME     /var/atlassian/confluence

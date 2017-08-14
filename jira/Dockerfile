@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM hub.slyak.com/common
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
