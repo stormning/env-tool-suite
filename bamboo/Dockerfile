@@ -24,14 +24,9 @@ RUN  rm "${BAMBOO_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-mana
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BAMBOO_WEB}/atlassian-bundled-plugins/
 
 RUN set -x \
-    && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
     && curl --silent https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
     && apt-get install --quiet --yes --no-install-recommends git-lfs \
-    && git lfs install \
-    && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
-    && apt-get clean
+    && git lfs install
 RUN rm -rf /var/lib/apt/lists/* \
     && mkdir -p               "${BAMBOO_HOME}/lib" \
     && chmod -R 700           "${BAMBOO_HOME}" \

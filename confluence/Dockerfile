@@ -16,6 +16,13 @@ ADD atlassian-confluence-${CONF_VERSION}.tar /
 RUN mkdir -p /opt/atlassian \
     && mv /atlassian-confluence-${CONF_VERSION} ${CONF_INSTALL}
 
+#copy fonts
+ADD Fonts.zip /
+RUN unzip -q Fonts.zip && mv Fonts /usr/share/fonts/truetype/msttcorefonts && rm -f Fonts.zip
+
+#setenv
+COPY setenv.sh ${CONF_INSTALL}/bin/
+
 #use mysql
 COPY mysql-connector-java-5.1.39.jar ${CONF_WEB_LIB}/
 
@@ -24,10 +31,6 @@ COPY atlassian-extras-decoder-v2-3.2.jar ${CONF_WEB_LIB}/
 RUN  rm "${CONF_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${CONF_WEB}/atlassian-bundled-plugins/
 
-RUN set -x \
-    && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet \
-    && apt-get clean
 RUN mkdir -p                   "${CONF_HOME}" \
     && chmod -R 700            "${CONF_HOME}" \
     && chown daemon:daemon     "${CONF_HOME}" \

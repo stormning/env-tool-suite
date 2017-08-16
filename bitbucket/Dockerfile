@@ -27,12 +27,6 @@ COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BITBUCKET_WEB}/atlassi
 #language
 COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
 
-RUN set -x \
-    && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends git-core xmlstarlet \
-    && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
-    && apt-get clean
 RUN mkdir -p                  "${BITBUCKET_HOME}/lib" \
     && chmod -R 700           "${BITBUCKET_HOME}" \
     && chown -R daemon:daemon "${BITBUCKET_HOME}" \
