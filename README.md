@@ -22,3 +22,6 @@
     * clover 测试代码覆盖率分析
     * crowd 单点登录与认证管理
     * shipyard docker镜像和容器管理
+    
+* 设置参考
+    * https://confluence.atlassian.com/doc/database-setup-for-mysql-128747.html
