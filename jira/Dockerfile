@@ -19,6 +19,12 @@ COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 #jira crack
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
+#crowd sso
+COPY crowd/crowd-integration-client-3.0.1.jar ${JIRA_WEB_LIB}/
+COPY crowd/conf/crowd.properties  ${JIRA_WEB}/classes/
+COPY crowd/conf/crowd-ehcache.xml ${JIRA_WEB}/classes/
+COPY seraph-config.xml ${JIRA_WEB}/classes/
+
 RUN  rm "${JIRA_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.21.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${JIRA_WEB}/atlassian-bundled-plugins/
 
