@@ -1,85 +1,98 @@
 version: '2.0'
 services:
-#  nginx:
-#    image: hub.slyak.com/nginx
-#    restart: always
-#    environment:
-#      SERVER_NAME: dev.slyak.com
-#    ports:
-#      - 80:80
-#    links:
-#      - jira
-#      - bamboo
-#      - bitbucket
-#      - confluence
-#      - fecru
-#      - crowd
-#    volumes:
-#      - /var/slyak/nginx:/etc/nginx
-#      - /opt/slyak/nginx:/usr/share/nginx
+  nginx:
+    image: hub.slyak.com/nginx
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - jira
+      - bamboo
+      - bitbucket
+      - confluence
+      - fecru
+      - crowd
+    volumes:
+      - /etc/nginx:/etc/nginx
+      - /usr/share/nginx:/usr/share/nginx
+    env_file:
+      - common.env
 
   jira:
     image: hub.slyak.com/jira
     restart: always
-    ports:
-      - 8080:8080
-    links:
-      - crowd
+#    ports:
+#      - 8080:8080
+    environment:
+      - CROWD_BASE_URL=${SERVER_NAME}/crowd
     volumes:
       - /var/atlassian/jira:/var/atlassian/jira
+    env_file:
+      - common.env
+
 
 #  bamboo:
 #    image: hub.slyak.com/bamboo
 #    restart: always
-#    ports:
-#      - 8085:8085
-#      - 54663:54663
+##    ports:
+##      - 8085:8085
+##      - 54663:54663
 #    links:
 #      - crowd
 #    volumes:
 #      - /var/atlassian/bamboo:/var/atlassian/bamboo
 #      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+#    env_file:
+#      - common.env
 
 #  bitbucket:
 #    image: hub.slyak.com/bitbucket
 #    restart: always
-#    ports:
-#      - 7990:7990
-#      - 7999:7999
+##    ports:
+##      - 7990:7990
+##      - 7999:7999
 #    links:
 #      - crowd
 #    volumes:
 #      - /var/atlassian/bitbucket:/var/atlassian/bitbucket
 #      - /var/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
+#    env_file:
+#      - common.env
 
 #  confluence:
 #    image: hub.slyak.com/confluence
 #    restart: always
-#    ports:
-#      - 8090:8090
+##    ports:
+##      - 8090:8090
 #    links:
 #      - crowd
 #    volumes:
 #      - /var/atlassian/confluence:/var/atlassian/confluence
 #      - /var/atlassian/confluence/logs:/opt/atlassian/confluence/logs
+#    env_file:
+#      - common.env
 
 #  fecru:
 #    image: hub.slyak.com/fecru
 #    restart: always
-#    ports:
-#      - 8060:8060
+##    ports:
+##      - 8060:8060
 #    links:
 #      - crowd
 #    volumes:
 #      - /var/atlassian/fisheye:/var/atlassian/fisheye
+#    env_file:
+#      - common.env
 
   crowd:
       image: hub.slyak.com/crowd
       restart: always
-      ports:
-        - 8095:8095
+#      ports:
+#        - 8095:8095
       volumes:
         - /var/atlassian/crowd:/var/atlassian/crowd
+      env_file:
+        - common.env
 
 #  mysql:
 #    image: mysql:5

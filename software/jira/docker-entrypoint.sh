@@ -3,6 +3,9 @@
 # check if the `server.xml` file has been changed since the creation of this
 # Docker image. If the file has been changed the entrypoint script will not
 # perform modifications to the configuration file.
+
+sed --in-place "s/CROWD_HOLDER/${CROWD_BASE_URL}/g" "${JIRA_WEB}/classes/crowd.properties"
+
 if [ "$(stat --format "%Y" "${JIRA_INSTALL}/conf/server.xml")" -eq "0" ]; then
   if [ -n "${X_PROXY_NAME}" ]; then
     xmlstarlet ed --inplace --pf --ps --insert '//Connector[@port="8080"]' --type "attr" --name "proxyName" --value "${X_PROXY_NAME}" "${JIRA_INSTALL}/conf/server.xml"

@@ -6,6 +6,10 @@ ENV JIRA_WEB      ${JIRA_INSTALL}/atlassian-jira/WEB-INF
 ENV JIRA_WEB_LIB  ${JIRA_WEB}/lib
 ENV JIRA_VERSION  7.3.6
 
+#application.login.url                   http://crowd:8095/crowd/console/
+#crowd.server.url                        http://crowd:8095/crowd/services/
+#crowd.base.url                          http://crowd:8095/crowd/
+
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 
@@ -24,6 +28,7 @@ COPY crowd/crowd-integration-client-3.0.1.jar ${JIRA_WEB_LIB}/
 COPY crowd/conf/crowd.properties  ${JIRA_WEB}/classes/
 COPY crowd/conf/crowd-ehcache.xml ${JIRA_WEB}/classes/
 COPY seraph-config.xml ${JIRA_WEB}/classes/
+ENV CROWD_BASE_URL http://dev.slyak.com/crowd
 
 RUN  rm "${JIRA_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.21.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${JIRA_WEB}/atlassian-bundled-plugins/
