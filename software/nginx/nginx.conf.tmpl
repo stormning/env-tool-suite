@@ -27,5 +27,7 @@ http {
 
     #gzip  on;
 
+    resolver $NAMESERVERS;
+
     include /etc/nginx/conf.d/*.conf;
 }

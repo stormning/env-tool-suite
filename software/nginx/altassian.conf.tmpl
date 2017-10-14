@@ -1,38 +1,11 @@
-upstream jira {
-    server jira:8080;
-}
-
-upstream bamboo {
-    server bamboo:8085;
-}
-
-upstream bitbucket {
-    server bitbucket:7990;
-}
-
-upstream confluence {
-    server confluence:8090;
-}
-
-upstream crowd {
-    server crowd:8095;
-}
-
-upstream fecru {
-    server fecru:8060;
-}
-
-upstream portainer {
-    server portainer:9000;
-}
-
 server {
-    server_name SERVER_NAME;
+    server_name ${SERVER_NAME};
     location /jira {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://jira;
+        set $upstream_jira jira;
+        proxy_pass http://$upstream_jira:8080;
         client_max_body_size 10M;
     }
 
@@ -40,7 +13,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://bamboo;
+        set $upstream_bamboo bamboo;
+        proxy_pass http://$upstream_bamboo:8085;
         client_max_body_size 10M;
     }
 
@@ -48,7 +22,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://bitbucket;
+        set $upstream_bitbucket bitbucket;
+        proxy_pass http://$upstream_bitbucket:7990;
         client_max_body_size 10M;
     }
 
@@ -56,7 +31,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://confluence;
+        set $upstream_confluence confluence;
+        proxy_pass http://$upstream_confluence:8090;
         client_max_body_size 10M;
     }
 
@@ -64,7 +40,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://crowd:8095;
+        set $upstream_crowd crowd;
+        proxy_pass http://$upstream_crowd:8095;
         client_max_body_size 10M;
     }
 
@@ -72,7 +49,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://fecru:8060;
+        set $upstream_fecru fecru;
+        proxy_pass http://$upstream_fecru:8060;
         client_max_body_size 10M;
     }
 
@@ -80,7 +58,8 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://portainer:9000;
+        set $upstream_portainer portainer;
+        proxy_pass http://$upstream_portainer:9000;
         client_max_body_size 10M;
     }
 }

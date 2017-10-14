@@ -4,6 +4,10 @@
 # Docker image. If the file has been changed the entrypoint script will not
 # perform modifications to the configuration file.
 
-sed -i "s/SERVER_NAME/${SERVER_NAME}/" /etc/nginx/conf.d/altassian.conf
+export NAMESERVERS=$(cat /etc/resolv.conf | grep "nameserver" | awk '{print $2}' | tr '\n' ' ')
+
+envsubst '$NAMESERVERS' < /etc/nginx/nginx.conf.tmpl > /etc/nginx/nginx.conf
+
+envsubst '${SERVER_NAME}' < /etc/nginx/conf.d/altassian.conf.tmpl > /etc/nginx/conf.d/altassian.conf
 
 exec "$@"
