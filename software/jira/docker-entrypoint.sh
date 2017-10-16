@@ -4,7 +4,7 @@
 # Docker image. If the file has been changed the entrypoint script will not
 # perform modifications to the configuration file.
 
-sed --in-place "s/CROWD_HOLDER/${CROWD_BASE_URL}/g" "${JIRA_WEB}/classes/crowd.properties"
+envsubst '${CROWD_BASE_URL}' < "${JIRA_WEB}/classes/crowd.properties.tmpl" > "${JIRA_WEB}/classes/crowd.properties"
 
 if [ "$(stat --format "%Y" "${JIRA_INSTALL}/conf/server.xml")" -eq "0" ]; then
   if [ -n "${X_PROXY_NAME}" ]; then

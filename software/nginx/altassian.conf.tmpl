@@ -5,7 +5,7 @@ server {
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         set $upstream_jira jira;
-        proxy_pass http://$upstream_jira:8080;
+        proxy_pass http://$upstream_jira:8080/jira;
         client_max_body_size 10M;
     }
 
@@ -41,7 +41,7 @@ server {
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         set $upstream_crowd crowd;
-        proxy_pass http://$upstream_crowd:8095;
+        proxy_pass http://$upstream_crowd:8095/crowd;
         client_max_body_size 10M;
     }
 

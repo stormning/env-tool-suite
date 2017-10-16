@@ -7,28 +7,28 @@ services:
       - 80:80
     links:
       - jira
-      - bamboo
-      - bitbucket
-      - confluence
-      - fecru
       - crowd
-    volumes:
-      - /etc/nginx:/etc/nginx
-      - /usr/share/nginx:/usr/share/nginx
+    depends_on:
+      - jira
+      - crowd
     env_file:
       - common.env
+    networks:
+      - dev
 
   jira:
     image: hub.slyak.com/jira
     restart: always
 #    ports:
 #      - 8080:8080
-    environment:
-      - CROWD_BASE_URL=${SERVER_NAME}/crowd
     volumes:
       - /var/atlassian/jira:/var/atlassian/jira
     env_file:
       - common.env
+    links:
+      - crowd
+    networks:
+      - dev
 
 
 #  bamboo:
@@ -93,6 +93,8 @@ services:
         - /var/atlassian/crowd:/var/atlassian/crowd
       env_file:
         - common.env
+      networks:
+        - dev
 
 #  mysql:
 #    image: mysql:5
@@ -112,3 +114,7 @@ services:
 #      - /var/run/docker.sock:/var/run/docker.sock
 #    ports:
 #      - 9000:9000
+
+
+networks:
+  dev:

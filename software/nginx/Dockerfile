@@ -2,6 +2,8 @@ FROM nginx:1.13.3
 
 ENV SERVER_NAME  dev.slyak.com
 
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y vim inetutils-ping
+
 COPY index.html /usr/share/nginx/html/
 COPY nginx.conf.tmpl /etc/nginx/
 COPY altassian.conf.tmpl /etc/nginx/conf.d/
