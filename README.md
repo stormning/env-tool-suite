@@ -26,8 +26,12 @@
     * FTP服务器 TODO
     
 * 参考资料
-    * https://confluence.atlassian.com/doc/database-setup-for-mysql-128747.html    
-    
+    * 数据库设置
+        * https://confluence.atlassian.com/doc/database-setup-for-mysql-128747.html
+    * CROWD创建应用和用户组初始化
+        * import users 或者创建对应应用的用户角色
+        * 如:https://confluence.atlassian.com/crowd/integrating-crowd-with-atlassian-jira-192625.html
+        
 * FAQ
     * 如何编译相关镜像?
         * 首先编译common，再分别编译其他软件

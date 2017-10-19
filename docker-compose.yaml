@@ -27,66 +27,66 @@ services:
         aliases:
           - jira
 
+  bamboo:
+    image: hub.slyak.com/bamboo
+    restart: always
+    volumes:
+      - /var/atlassian/bamboo:/var/atlassian/bamboo
+      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bamboo
 
+  bitbucket:
+    image: hub.slyak.com/bitbucket
+    restart: always
+    links:
+      - crowd
+    volumes:
+      - /var/atlassian/bitbucket:/var/atlassian/bitbucket
+      - /var/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bitbucket
 
-#  bamboo:
-#    image: hub.slyak.com/bamboo
-#    restart: always
-##    ports:
-##      - 8085:8085
-##      - 54663:54663
-#    links:
-#      - crowd
-#    volumes:
-#      - /var/atlassian/bamboo:/var/atlassian/bamboo
-#      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
-#    env_file:
-#      - common.env
+  confluence:
+    image: hub.slyak.com/confluence
+    restart: always
+    links:
+      - crowd
+    volumes:
+      - /var/atlassian/confluence:/var/atlassian/confluence
+      - /var/atlassian/confluence/logs:/opt/atlassian/confluence/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - confluence
 
-#  bitbucket:
-#    image: hub.slyak.com/bitbucket
-#    restart: always
-##    ports:
-##      - 7990:7990
-##      - 7999:7999
-#    links:
-#      - crowd
-#    volumes:
-#      - /var/atlassian/bitbucket:/var/atlassian/bitbucket
-#      - /var/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
-#    env_file:
-#      - common.env
-
-#  confluence:
-#    image: hub.slyak.com/confluence
-#    restart: always
-##    ports:
-##      - 8090:8090
-#    links:
-#      - crowd
-#    volumes:
-#      - /var/atlassian/confluence:/var/atlassian/confluence
-#      - /var/atlassian/confluence/logs:/opt/atlassian/confluence/logs
-#    env_file:
-#      - common.env
-
-#  fecru:
-#    image: hub.slyak.com/fecru
-#    restart: always
-##    ports:
-##      - 8060:8060
-#    links:
-#      - crowd
-#    volumes:
-#      - /var/atlassian/fisheye:/var/atlassian/fisheye
-#    env_file:
-#      - common.env
+  fecru:
+    image: hub.slyak.com/fecru
+    restart: always
+    links:
+      - crowd
+    volumes:
+      - /var/atlassian/fisheye:/var/atlassian/fisheye
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - fecru
 
   crowd:
       image: hub.slyak.com/crowd
       restart: always
-#      ports:
-#        - 8095:8095
       volumes:
         - /var/atlassian/crowd:/var/atlassian/crowd
       env_file:
@@ -106,15 +106,16 @@ services:
 #    volumes:
 #      - /var/slyak/mysql:/etc/mysql/conf.d
 #      - /opt/slyak/mysql:/var/lib/mysql
-#
-#  portainer:
-#    image: portainer/portainer
-#    restart: always
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    ports:
-#      - 9000:9000
 
+  portainer:
+    image: portainer/portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      dev:
+        aliases:
+          - portainer
 
 networks:
   dev:
