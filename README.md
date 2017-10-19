@@ -21,6 +21,9 @@
     * clover 测试代码覆盖率分析
     * crowd 单点登录与认证管理
     * portainer docker镜像和容器管理
+    * 邮件服务器 TODO
+    * DNS服务器 TODO
+    * FTP服务器 TODO
     
 * 参考资料
     * https://confluence.atlassian.com/doc/database-setup-for-mysql-128747.html    
