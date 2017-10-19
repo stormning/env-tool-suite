@@ -15,7 +15,10 @@
 *.dmg
 *.gz
 *.iso
+*.jar
 *.rar
+*.tar
+*.zip
 
 # Logs and databases #
 ######################
@@ -70,6 +73,7 @@ dist/*
 *.class
 
 # Package Files #
+*.jar
 *.war
 *.ear
 node_modules
