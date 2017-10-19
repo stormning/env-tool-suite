@@ -1,6 +1,6 @@
 FROM nginx:1.13.3
 
-ENV SERVER_NAME  dev.slyak.com
+ENV X_PROXY_NAME  dev.slyak.com
 
 RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y vim inetutils-ping
 

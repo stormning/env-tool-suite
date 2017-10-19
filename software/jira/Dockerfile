@@ -5,11 +5,11 @@ ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_WEB      ${JIRA_INSTALL}/atlassian-jira/WEB-INF
 ENV JIRA_WEB_LIB  ${JIRA_WEB}/lib
 ENV JIRA_VERSION  7.3.6
-ENV SERVER_NAME   dev.slyak.com
-ENV CROWD_BASE_URL http://${SERVER_NAME}/crowd
-ENV X_PROXY_NAME   ${SERVER_NAME}
+
+ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80
-ENV X_PATH         jira
+ENV X_PATH         /jira
+ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
 
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.

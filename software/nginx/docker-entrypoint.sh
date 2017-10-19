@@ -8,6 +8,6 @@ export NAMESERVERS=$(cat /etc/resolv.conf | grep "nameserver" | awk '{print $2}'
 
 envsubst '$NAMESERVERS' < /etc/nginx/nginx.conf.tmpl > /etc/nginx/nginx.conf
 
-envsubst '${SERVER_NAME}' < /etc/nginx/conf.d/altassian.conf.tmpl > /etc/nginx/conf.d/altassian.conf
+envsubst '${X_PROXY_NAME}' < /etc/nginx/conf.d/altassian.conf.tmpl > /etc/nginx/conf.d/altassian.conf
 
 exec "$@"

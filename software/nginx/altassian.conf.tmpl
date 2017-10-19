@@ -1,11 +1,11 @@
 server {
-    server_name ${SERVER_NAME};
+    server_name ${X_PROXY_NAME};
     location /jira {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         set $upstream_jira jira;
-        proxy_pass http://$upstream_jira:8080/jira;
+        proxy_pass http://$upstream_jira:8080;
         client_max_body_size 10M;
     }
 
@@ -37,13 +37,15 @@ server {
     }
 
     location /crowd {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         set $upstream_crowd crowd;
-        proxy_pass http://$upstream_crowd:8095/crowd;
+        proxy_pass http://$upstream_crowd:8095;
+        proxy_set_header    Host            $host;
+        proxy_set_header    X-Real-IP       $remote_addr;
+        proxy_set_header    X-Forwarded-for $remote_addr;
+        port_in_redirect off;
         client_max_body_size 10M;
     }
+
 
     location /fecru {
         proxy_set_header X-Forwarded-Host $host;

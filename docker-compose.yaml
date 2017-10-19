@@ -5,30 +5,28 @@ services:
     restart: always
     ports:
       - 80:80
-    links:
-      - jira
-      - crowd
     depends_on:
       - jira
       - crowd
     env_file:
       - common.env
     networks:
-      - dev
+      dev:
+        aliases:
+          - dev.slyak.com
 
   jira:
     image: hub.slyak.com/jira
     restart: always
-#    ports:
-#      - 8080:8080
     volumes:
       - /var/atlassian/jira:/var/atlassian/jira
     env_file:
       - common.env
-    links:
-      - crowd
     networks:
-      - dev
+      dev:
+        aliases:
+          - jira
+
 
 
 #  bamboo:
@@ -94,7 +92,9 @@ services:
       env_file:
         - common.env
       networks:
-        - dev
+        dev:
+          aliases:
+            - crowd
 
 #  mysql:
 #    image: mysql:5
