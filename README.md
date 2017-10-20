@@ -39,7 +39,17 @@
             * https://confluence.atlassian.com/crowd/integrating-crowd-with-atlassian-fisheye-200895.html
         * bamboo
             * https://confluence.atlassian.com/crowd/integrating-crowd-with-atlassian-bamboo-198785.html
-        
+
+
+<table style="margin-left:80px">
+	<tr><th>软件</th><th></th></tr>
+	<tr><td rowspan="3">jira</td><td>jira-users</td></tr>
+	<tr><td>jira-developers</td></tr>
+	<tr><td>jira-administrators</td></tr>
+	<tr><td rowspan="2">confluence</td><td>confluence-users</td></tr>
+	<tr><td>confluence-administrators</td></tr>
+</table>      
+ 
 * FAQ
     * 如何编译相关镜像?
         * 执行build.sh即可
