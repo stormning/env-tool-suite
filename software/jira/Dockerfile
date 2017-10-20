@@ -6,11 +6,6 @@ ENV JIRA_WEB      ${JIRA_INSTALL}/atlassian-jira/WEB-INF
 ENV JIRA_WEB_LIB  ${JIRA_WEB}/lib
 ENV JIRA_VERSION  7.3.6
 
-ENV X_PROXY_NAME   dev.slyak.com
-ENV X_PROXY_PORT   80
-ENV X_PATH         /jira
-ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
-
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 
@@ -25,6 +20,11 @@ COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
 #crowd sso
+ENV X_PROXY_NAME   dev.slyak.com
+ENV X_PROXY_PORT   80
+ENV X_PATH         /jira
+ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
+
 COPY crowd/conf/crowd.properties.tmpl  ${JIRA_WEB}/classes/
 COPY crowd/conf/crowd-ehcache.xml ${JIRA_WEB}/classes/
 COPY seraph-config.xml ${JIRA_WEB}/classes/

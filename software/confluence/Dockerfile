@@ -31,20 +31,25 @@ COPY atlassian-extras-decoder-v2-3.2.jar ${CONF_WEB_LIB}/
 RUN  rm "${CONF_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${CONF_WEB}/atlassian-bundled-plugins/
 
+#crowd sso
+ENV X_PROXY_NAME   dev.slyak.com
+ENV X_PROXY_PORT   80
+ENV X_PATH         /confluence
+ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
+
+COPY crowd/conf/crowd.properties.tmpl  ${CONF_WEB}/classes/
+COPY seraph-config.xml ${CONF_WEB}/classes/
+
 RUN mkdir -p                   "${CONF_HOME}" \
     && chmod -R 700            "${CONF_HOME}" \
-    && chown daemon:daemon     "${CONF_HOME}" \
     && mkdir -p                "${CONF_INSTALL}/conf" \
-#    && curl -Ls                "https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONF_VERSION}.tar.gz" | tar -xz --directory "${CONF_INSTALL}" --strip-components=1 --no-same-owner \
-#    && curl -Ls                "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.38.tar.gz" | tar -xz --directory "${CONF_INSTALL}/confluence/WEB-INF/lib" --strip-components=1 --no-same-owner "mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar" \
     && chmod -R 700            "${CONF_INSTALL}/conf" \
+    && mkdir -p                "${CONF_INSTALL}/temp" \
     && chmod -R 700            "${CONF_INSTALL}/temp" \
+    && mkdir -p                "${CONF_INSTALL}/logs" \
     && chmod -R 700            "${CONF_INSTALL}/logs" \
+    && mkdir -p                "${CONF_INSTALL}/work" \
     && chmod -R 700            "${CONF_INSTALL}/work" \
-    && chown -R daemon:daemon  "${CONF_INSTALL}/conf" \
-    && chown -R daemon:daemon  "${CONF_INSTALL}/temp" \
-    && chown -R daemon:daemon  "${CONF_INSTALL}/logs" \
-    && chown -R daemon:daemon  "${CONF_INSTALL}/work" \
     && echo -e                 "\nconfluence.home=$CONF_HOME" >> "${CONF_INSTALL}/confluence/WEB-INF/classes/confluence-init.properties" \
     && xmlstarlet              ed --inplace \
         --delete               "Server/@debug" \
@@ -57,12 +62,6 @@ RUN mkdir -p                   "${CONF_HOME}" \
         --delete               "Server/Service/Engine/Host/Context/@debug" \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
-    && chown daemon:daemon     "${JAVA_CACERTS}"
-
-# Use the default unprivileged account. This could be considered bad practice
-# on systems where multiple processes end up being executed by 'daemon' but
-# here we only ever run one process anyway.
-USER daemon:daemon
 
 # Expose default HTTP connector port.
 EXPOSE 8090

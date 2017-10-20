@@ -5,9 +5,9 @@ services:
     restart: always
     ports:
       - 80:80
-    depends_on:
-      - jira
-      - crowd
+#    depends_on:
+#      - jira
+#      - crowd
     env_file:
       - common.env
     networks:
@@ -15,45 +15,45 @@ services:
         aliases:
           - dev.slyak.com
 
-  jira:
-    image: hub.slyak.com/jira
-    restart: always
-    volumes:
-      - /var/atlassian/jira:/var/atlassian/jira
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - jira
+#  jira:
+#    image: hub.slyak.com/jira
+#    restart: always
+#    volumes:
+#      - /var/atlassian/jira:/var/atlassian/jira
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - jira
 
-  bamboo:
-    image: hub.slyak.com/bamboo
-    restart: always
-    volumes:
-      - /var/atlassian/bamboo:/var/atlassian/bamboo
-      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bamboo
+#  bamboo:
+#    image: hub.slyak.com/bamboo
+#    restart: always
+#    volumes:
+#      - /var/atlassian/bamboo:/var/atlassian/bamboo
+#      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - bamboo
 
-  bitbucket:
-    image: hub.slyak.com/bitbucket
-    restart: always
-    links:
-      - crowd
-    volumes:
-      - /var/atlassian/bitbucket:/var/atlassian/bitbucket
-      - /var/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bitbucket
+#  bitbucket:
+#    image: hub.slyak.com/bitbucket
+#    restart: always
+#    links:
+#      - crowd
+#    volumes:
+#      - /var/atlassian/bitbucket:/var/atlassian/bitbucket
+#      - /var/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - bitbucket
 
   confluence:
     image: hub.slyak.com/confluence
@@ -70,19 +70,19 @@ services:
         aliases:
           - confluence
 
-  fecru:
-    image: hub.slyak.com/fecru
-    restart: always
-    links:
-      - crowd
-    volumes:
-      - /var/atlassian/fisheye:/var/atlassian/fisheye
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - fecru
+#  fecru:
+#    image: hub.slyak.com/fecru
+#    restart: always
+#    links:
+#      - crowd
+#    volumes:
+#      - /var/atlassian/fisheye:/var/atlassian/fisheye
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - fecru
 
   crowd:
       image: hub.slyak.com/crowd
@@ -107,15 +107,15 @@ services:
 #      - /var/slyak/mysql:/etc/mysql/conf.d
 #      - /opt/slyak/mysql:/var/lib/mysql
 
-  portainer:
-    image: portainer/portainer
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      dev:
-        aliases:
-          - portainer
+#  portainer:
+#    image: portainer/portainer
+#    restart: always
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      dev:
+#        aliases:
+#          - portainer
 
 networks:
   dev:
