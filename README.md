@@ -42,7 +42,7 @@
 
 
 <table style="margin-left:80px">
-	<tr><th>软件</th><th></th></tr>
+	<tr><th>CROWD中初始化应用</th><th>CROWD中初始化用户组</th></tr>
 	<tr><td rowspan="3">jira</td><td>jira-users</td></tr>
 	<tr><td>jira-developers</td></tr>
 	<tr><td>jira-administrators</td></tr>
