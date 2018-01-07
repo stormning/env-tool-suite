@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
-function buildOne (){
-    docker build -t "hub.slyak.com/$1" "$2"
-}
-
 function buildByName (){
-    buildOne  "$1" "./software/$1"
+    docker build -t "hub.slyak.com/$1" "./software/$1"
 }
 
 function buildAll (){
-    docker build -t "hub.slyak.com/common" ./software/common
+    buildByName 'common'
     for file in ./software/*
     do
         imgName=$(basename $file)
         if [ $imgName != 'common' ]; then
-            buildOne "hub.slyak.com/$imgName" ${file}
+            buildByName $imgName
         fi
     done
 }
