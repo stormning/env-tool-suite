@@ -9,9 +9,10 @@
 * 基本镜像
     * docker-registry
     * docker-registry-ui
-    * nginx
+    * [redis](./software/redis) Key-Value数据库
+    * [nginx](./software/nginx) http反向代理，TCP/UDP代理
     * mysql
-* 应用镜像
+* 研发管理镜像
     * nexus 代码仓库
     * [jira](./software/jira) 项目管理事务跟踪
     * [confluence](./software/confluence) 团队协同与知识管理
@@ -21,8 +22,6 @@
     * [clover](./software/clover) 测试代码覆盖率分析
     * [crowd](./software/crowd) 单点登录与认证管理
     * portainer docker镜像和容器管理
-    * [redis](./software/redis) Key-Value数据库
-    * [nginx](./software/nginx) http反向代理，TCP/UDP代理
     * 邮件服务器 TODO
     * DNS服务器 TODO
     * FTP服务器 TODO
