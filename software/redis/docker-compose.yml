@@ -1,0 +1,40 @@
+master:
+  image: hub.slyak.com/redis
+  ports:
+    - 16379:6379
+  environment:
+    - IP=${IP}
+    - PORT=16379
+
+slave:
+  image: hub.slyak.com/redis
+  ports:
+    - 26379:6379
+  environment:
+    - MODE=slave
+    - IP=${IP}
+    - PORT=26379
+    - MASTER_IP=${IP}
+    - MASTER_PORT=16379
+
+sentinel-1:
+  image: hub.slyak.com/redis
+  ports:
+    - 36379:6379
+  environment:
+    - MODE=sentinel
+    - IP=${IP}
+    - PORT=36379
+    - MASTER_IP=${IP}
+    - MASTER_PORT=16379
+
+sentinel-2:
+  image: hub.slyak.com/redis
+  ports:
+    - 46379:6379
+  environment:
+    - MODE=sentinel
+    - IP=${IP}
+    - PORT=46379
+    - MASTER_IP=${IP}
+    - MASTER_PORT=16379
