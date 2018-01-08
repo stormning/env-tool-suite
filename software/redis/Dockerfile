@@ -1,6 +1,6 @@
 FROM redis:4
 ENV MODE master
-ENV QUORUM 1
+ENV QUORUM 2
 ENV IP 127.0.0.1
 ENV PORT 6379
 ENV MASTER_NAME mymaster
@@ -15,4 +15,5 @@ RUN set -x \
     && apt-get clean
 
 COPY "docker-entrypoint.sh" "/"
+EXPOSE 6379
 ENTRYPOINT ["/docker-entrypoint.sh"]
