@@ -1,5 +1,5 @@
 master:
-  image: hub.slyak.com/redis
+  image: slyak/redis
   ports:
     - 16379:6379
   environment:
@@ -7,7 +7,7 @@ master:
     - PORT=16379
 
 slave:
-  image: hub.slyak.com/redis
+  image: slyak/redis
   ports:
     - 26379:6379
   environment:
@@ -18,7 +18,7 @@ slave:
     - MASTER_PORT=16379
 
 sentinel-1:
-  image: hub.slyak.com/redis
+  image: slyak/redis
   ports:
     - 36379:6379
   environment:
@@ -29,7 +29,7 @@ sentinel-1:
     - MASTER_PORT=16379
 
 sentinel-2:
-  image: hub.slyak.com/redis
+  image: slyak/redis
   ports:
     - 46379:6379
   environment:

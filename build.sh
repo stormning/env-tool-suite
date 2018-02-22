@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function buildByName (){
-    docker build -t "hub.slyak.com/$1" "./software/$1"
+    docker build -t "slyak/$1" "./software/$1"
 }
 
 function buildAll (){

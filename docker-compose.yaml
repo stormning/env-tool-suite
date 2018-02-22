@@ -1,7 +1,7 @@
 version: '2.0'
 services:
   nginx:
-    image: hub.slyak.com/nginx
+    image: slyak/nginx
     restart: always
     ports:
       - 80:80
@@ -16,7 +16,7 @@ services:
           - dev.slyak.com
 
 #  jira:
-#    image: hub.slyak.com/jira
+#    image: slyak/jira
 #    restart: always
 #    volumes:
 #      - /var/atlassian/jira:/var/atlassian/jira
@@ -28,7 +28,7 @@ services:
 #          - jira
 
 #  bamboo:
-#    image: hub.slyak.com/bamboo
+#    image: slyak/bamboo
 #    restart: always
 #    volumes:
 #      - /var/atlassian/bamboo:/var/atlassian/bamboo
@@ -41,7 +41,7 @@ services:
 #          - bamboo
 
 #  bitbucket:
-#    image: hub.slyak.com/bitbucket
+#    image: slyak/bitbucket
 #    restart: always
 #    links:
 #      - crowd
@@ -56,7 +56,7 @@ services:
 #          - bitbucket
 
   confluence:
-    image: hub.slyak.com/confluence
+    image: slyak/confluence
     restart: always
     links:
       - crowd
@@ -71,7 +71,7 @@ services:
           - confluence
 
 #  fecru:
-#    image: hub.slyak.com/fecru
+#    image: slyak/fecru
 #    restart: always
 #    links:
 #      - crowd
@@ -85,7 +85,7 @@ services:
 #          - fecru
 
   crowd:
-      image: hub.slyak.com/crowd
+      image: slyak/crowd
       restart: always
       volumes:
         - /var/atlassian/crowd:/var/atlassian/crowd

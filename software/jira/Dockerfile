@@ -1,4 +1,4 @@
-FROM hub.slyak.com/common
+FROM slyak/common
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira

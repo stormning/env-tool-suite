@@ -1,4 +1,4 @@
-FROM hub.slyak.com/common
+FROM slyak/common
 
 # Setup useful environment variables
 ENV BITBUCKET_HOME     /var/atlassian/bitbucket

@@ -1,4 +1,4 @@
-FROM hub.slyak.com/common
+FROM slyak/common
 
 # Setup useful environment variables
 ENV BAMBOO_HOME     /var/atlassian/bamboo
