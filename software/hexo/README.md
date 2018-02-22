@@ -11,6 +11,6 @@
 8. Deploy changes to github by using command `hexo deploy`.
 9. We can see the changes without any delay.
 
-That's all , all the things will be automatically done by this amazing docker image.
+That's all , all these things will be automatically done by this amazing docker image.
 
 
