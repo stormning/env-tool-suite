@@ -25,8 +25,8 @@ That's all , all these things will be automatically done by this amazing docker 
 
 ### Use nginx as web server
 ```
-mv hexo.conf /etc/nginx/conf.d/
-sed --in-place "s|slyak.com|yourdomain|g" "$HEXO_HOME/_config.yml" \
+curl -Ls https://raw.githubusercontent.com/stormning/env-tool-suite/master/software/hexo/hexo.conf \
+    | sed "s|slyak.com|yourdomain|g" > /etc/nginx/conf.d/hexo.conf
 service nginx restart
 ```
 ```
