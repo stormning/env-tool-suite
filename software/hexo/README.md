@@ -1,6 +1,7 @@
 # slyak/hexo
 
-##Architecture
+## Architecture
+
 <img src="./assets/hexo.png" width="400">
 
 1. Initialze your blog by cloning your github repository at the first time.
@@ -16,13 +17,13 @@
 That's all , all these things will be automatically done by this amazing docker image.
 
 
-##Run hex server
-###Preparations
+## Run hex server
+### Preparations
 1. Create a repository at github
 2. Add webhook with payload url and secret
 ![webhook](./assets/webhook.png)
 
-###Use nginx as web server
+### Use nginx as web server
 ```
 mv hexo.conf /etc/nginx/conf.d/
 sed --in-place "s|slyak.com|yourdomain|g" "$HEXO_HOME/_config.yml" \
@@ -37,7 +38,7 @@ docker run -idt -p 4001:4001 --name hexo \
  slyak/hexo
 ```
 
-###Or Use hexo default server
+### Or Use hexo default server
 ```
 docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
  -e GIT_URL=your_blog_ssh_url \ 
@@ -47,7 +48,7 @@ docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
  slyak/hexo hexo server
 ```
 
-###Setup SSH key
+### Setup SSH key
 `docker logs -f hexo`
 
 you will see:
@@ -55,7 +56,7 @@ you will see:
 copy the key to github , hexo service will continue to start.
 ![rsa](./assets/rsa.png)
 
-###Environments and ports explanation
+### Environments and ports explanation
 
 Docker run environments:
 
