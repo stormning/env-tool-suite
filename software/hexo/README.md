@@ -55,7 +55,7 @@ you will see:
 
 <img src="./assets/rsa_key.png" width="450">
 
-copy the key to github , hexo service will continue to start.
+copy the key to github , hexo server will continue to start.
 
 <img src="./assets/rsa.png" width="450">
 
@@ -75,5 +75,5 @@ Expose ports:
 | Port | Description |
 | --------    | :----- |
 | 4000     | Hexo server port (if you use hexo's web server) |
-| 4001 | Your github account |
+| 4001 | Webhook server port |
 
