@@ -16,6 +16,9 @@
 
 That's all , all these things will be automatically done by this amazing docker image.
 
+### hexo logic architecture:
+
+<img src="./assets/hexo-module.png" width="450">
 
 ## Run hex server
 ### Preparations
