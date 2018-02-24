@@ -1,21 +1,76 @@
 # slyak/hexo
-![hexo](./hexo.png)
 
-1. Init your blog by setting `GIT_URL` by which we will clone your github repository at the first time.
+##Architecture
+
+![hexo](./assets/hexo.png)
+
+1. Initialze your blog by cloning your github repository at the first time.
 2. If the cloned repository is empty , we will use `hexo init` to init your bolg.
-3. Generate hexo by using command `hexo generate`.
-4. Deploy hexo by using command `hexo deploy`.
-5. We commit something to github.
+3. Push default hexo resources to your github repository.
+4. Generate static web resources using command `hexo generate`.
+5. We write some posts and push them to github.
 6. Github notify the hexo server with the changes using webhook.
-7. We receive changes and generate hexo again by using command `hexo generate` .
-8. Deploy changes to github by using command `hexo deploy`.
+7. Webhook server receive event and reset repository and pull the latest sources from github .
+8. Generate static web resources using command `hexo generate`.
 9. We can see the changes without any delay.
 
 That's all , all these things will be automatically done by this amazing docker image.
 
 
-yum install nginx
+##Run hex server
+###Preparations
+1. Create a repository at github
+2. Add webhook with payload url and secret
+![webhook](./assets/webhook.png)
 
-mv hexo.cnf /etc/nginx/conf.d/
+###Use nginx as web server
+```
+mv hexo.conf /etc/nginx/conf.d/
+sed --in-place "s|slyak.com|yourdomain|g" "$HEXO_HOME/_config.yml" \
+service nginx restart
+```
+```
+docker run -idt -p 4001:4001 --name hexo \
+ -e GIT_URL=your_blog_ssh_url \ 
+ -e GIT_ACCOUNT=your_github_account \
+ -e WEB_HOOK_SECRET=your_web_hook \ 
+ -v /var/hexo:/var/hexo \
+ slyak/hexo
+```
 
-docker run -idt -p 4000:4000 -p 4001:4001 --name hexo -e GIT_URL=git@github.com:stormning/blog.git -e GIT_ACCOUNT=stormning@163.com -e WEB_HOOK_SECRET=slyak123 -v /var/hexo:/var/hexo slyak/hexo
+###Or Use hexo default server
+```
+docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
+ -e GIT_URL=your_blog_ssh_url \ 
+ -e GIT_ACCOUNT=your_github_account \
+ -e WEB_HOOK_SECRET=your_web_hook \ 
+ -v /var/hexo:/var/hexo \
+ slyak/hexo hexo server
+```
+
+###Setup SSH key
+`docker logs -f hexo`
+
+you will see:
+![rsa_key](./assets/rsa_key.png)
+copy the key to github , hexo service will continue to start.
+![rsa](./assets/rsa.png)
+
+###Environments and ports explanation
+
+Docker run environments:
+
+| Environment | Description |  Required  |
+| --------    | :-----   | :----: |
+| GIT_URL     | SSH url for github repository |   Y    |
+| GIT_ACCOUNT | Your github account |   Y    |
+| WEB_HOOK_SECRET | Github webook secret |   Y    |
+| HEXO_HOME | Hexo home directory, default is `/var/hexo` |   N    |
+
+Expose ports:
+
+| Port | Description |
+| --------    | :----- |
+| 4000     | Hexo server port (if you use hexo's web server) |
+| 4001 | Your github account |
+
