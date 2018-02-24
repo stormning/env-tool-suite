@@ -52,9 +52,11 @@ docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
 `docker logs -f hexo`
 
 you will see:
+
 <img src="./assets/rsa_key.png" width="450">
 
 copy the key to github , hexo service will continue to start.
+
 <img src="./assets/rsa.png" width="450">
 
 ### Environments and ports explanation
