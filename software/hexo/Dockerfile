@@ -1,20 +1,23 @@
-FROM slyak/common
+FROM node:9
 ENV HEXO_HOME /var/hexo
-ENV GIT_URL
-ENV GIT_ACCOUNT
+ENV GIT_URL ''
+ENV GIT_ACCOUNT ''
+ENV WEB_HOOK_SECRET secret
 COPY _config.yml /
+COPY webhook-server.js /
+COPY generate.sh /
 
 #nodejs git hexo
 RUN set -x \
-    && apt-get install -y nodejs && apt-get install -y git \
-    && npm install -g hexo-cli && npm install hexo-deployer-git --save && npm install hexo-generator-feed --save \
-    && npm install hexo-generator-sitemap --save
-#rsa key for git
-RUN ssh-keygen -t rsa -C ""
+    && sed --in-place "s|_secret_holder|$WEB_HOOK_SECRET|g" "/webhook-server.js" \
+    && apt-get install -y git-core \
+    && npm install -g hexo-cli \
+    && npm install -g github-webhook-handler \
+    && mkdir $HEXO_HOME
+
 VOLUME ["$HEXO_HOME"]
-WORKDIR $HEXO_HOME
 EXPOSE 4000
+EXPOSE 4001
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-CMD hexo server
+CMD /bin/sh

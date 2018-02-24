@@ -80,3 +80,5 @@ deploy:
   type: git
   repo: repo_url
   branch: master
+  name: git_user
+  email: git_account
