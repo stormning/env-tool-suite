@@ -2,7 +2,7 @@
 
 ##Architecture
 
-![hexo](./assets/hexo.png)
+![hexo](./assets/hexo.png){:height="50%" width="50%"}
 
 1. Initialze your blog by cloning your github repository at the first time.
 2. If the cloned repository is empty , we will use `hexo init` to init your bolg.
