@@ -31,21 +31,21 @@ service nginx restart
 ```
 ```
 docker run -idt -p 4001:4001 --name hexo \
- -e GIT_URL=your_blog_ssh_url \ 
- -e GIT_ACCOUNT=your_github_account \
- -e WEB_HOOK_SECRET=your_web_hook \ 
- -v /var/hexo:/var/hexo \
- slyak/hexo
+    -e GIT_URL=your_blog_ssh_url \ 
+    -e GIT_ACCOUNT=your_github_account \
+    -e WEB_HOOK_SECRET=your_web_hook \ 
+    -v /var/hexo:/var/hexo \
+    slyak/hexo
 ```
 
 ### Or Use hexo default server
 ```
 docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
- -e GIT_URL=your_blog_ssh_url \ 
- -e GIT_ACCOUNT=your_github_account \
- -e WEB_HOOK_SECRET=your_web_hook \ 
- -v /var/hexo:/var/hexo \
- slyak/hexo hexo server
+    -e GIT_URL=your_blog_ssh_url \ 
+    -e GIT_ACCOUNT=your_github_account \
+    -e WEB_HOOK_SECRET=your_web_hook \ 
+    -v /var/hexo:/var/hexo \
+    slyak/hexo hexo server
 ```
 
 ### Setup SSH key
