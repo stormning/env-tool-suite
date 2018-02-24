@@ -2,7 +2,7 @@
 
 ## Architecture
 
-<img src="./assets/hexo.png" width="500">
+<img src="./assets/hexo.png" width="450">
 
 1. Initialze your blog by cloning your github repository at the first time.
 2. If the cloned repository is empty , we will use `hexo init` to init your bolg.
@@ -21,7 +21,7 @@ That's all , all these things will be automatically done by this amazing docker 
 ### Preparations
 1. Create a repository at github
 2. Add webhook with payload url and secret
-![webhook](./assets/webhook.png)
+<img src="./assets/webhook.png" width="450">
 
 ### Use nginx as web server
 ```
@@ -52,9 +52,10 @@ docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
 `docker logs -f hexo`
 
 you will see:
-![rsa_key](./assets/rsa_key.png)
+<img src="./assets/rsa_key.png" width="450">
+
 copy the key to github , hexo service will continue to start.
-![rsa](./assets/rsa.png)
+<img src="./assets/rsa.png" width="450">
 
 ### Environments and ports explanation
 
