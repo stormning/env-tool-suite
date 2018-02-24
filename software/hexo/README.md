@@ -27,12 +27,12 @@ That's all , all these things will be automatically done by this amazing docker 
 <img src="./assets/webhook.png" width="450">
 
 ### Use nginx as web server
-```
+``` bash
 curl -Ls https://raw.githubusercontent.com/stormning/env-tool-suite/master/software/hexo/hexo.conf \
     | sed "s|slyak.com|yourdomain|g" > /etc/nginx/conf.d/hexo.conf
 service nginx restart
 ```
-```
+``` bash
 docker run -idt -p 4001:4001 --name hexo \
     -e GIT_URL=your_blog_ssh_url \ 
     -e GIT_ACCOUNT=your_github_account \
@@ -42,7 +42,7 @@ docker run -idt -p 4001:4001 --name hexo \
 ```
 
 ### Or Use hexo default server
-```
+``` bash
 docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
     -e GIT_URL=your_blog_ssh_url \ 
     -e GIT_ACCOUNT=your_github_account \
@@ -52,7 +52,9 @@ docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
 ```
 
 ### Setup SSH key
-`docker logs -f hexo`
+``` bash
+docker logs -f hexo
+```
 
 you will see:
 
