@@ -1,4 +1,4 @@
-# hexo-github
+# slyak/hexo
 ![hexo](./hexo.png)
 
 1. Init your blog by setting `GIT_URL` by which we will clone your github repository at the first time.
@@ -14,3 +14,8 @@
 That's all , all these things will be automatically done by this amazing docker image.
 
 
+yum install nginx
+
+mv hexo.cnf /etc/nginx/conf.d/
+
+docker run -idt -p 4000:4000 -p 4001:4001 --name hexo -e GIT_URL=git@github.com:stormning/blog.git -e GIT_ACCOUNT=stormning@163.com -e WEB_HOOK_SECRET=slyak123 -v /var/hexo:/var/hexo slyak/hexo
