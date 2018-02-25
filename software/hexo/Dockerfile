@@ -9,7 +9,6 @@ COPY generate.sh /
 
 #nodejs git hexo
 RUN set -x \
-    && sed --in-place "s|_secret_holder|$WEB_HOOK_SECRET|g" "/webhook-server.js" \
     && apt-get install -y git-core \
     && npm install -g hexo-cli \
     && npm install -g github-webhook-handler \

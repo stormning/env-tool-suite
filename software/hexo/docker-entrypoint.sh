@@ -82,5 +82,6 @@ else
 fi
 
 export NODE_PATH=$(npm root -g)
+sed --in-place "s|_secret_holder|$WEB_HOOK_SECRET|g" "/webhook-server.js"
 nohup node /webhook-server.js > /webhook.log &
 exec "$@"
