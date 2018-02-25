@@ -34,9 +34,9 @@ service nginx restart
 ```
 ``` bash
 docker run -idt -p 4001:4001 --name hexo \
-    -e GIT_URL=your_blog_ssh_url \ 
+    -e GIT_URL=your_blog_ssh_url \
     -e GIT_ACCOUNT=your_github_account \
-    -e WEB_HOOK_SECRET=your_web_hook \ 
+    -e WEB_HOOK_SECRET=your_web_hook \
     -v /var/hexo:/var/hexo \
     slyak/hexo
 ```
@@ -44,9 +44,9 @@ docker run -idt -p 4001:4001 --name hexo \
 ### Or Use hexo default server
 ``` bash
 docker run -idt -p 4000:4000 -p 4001:4001 --name hexo \
-    -e GIT_URL=your_blog_ssh_url \ 
+    -e GIT_URL=your_blog_ssh_url \
     -e GIT_ACCOUNT=your_github_account \
-    -e WEB_HOOK_SECRET=your_web_hook \ 
+    -e WEB_HOOK_SECRET=your_web_hook \
     -v /var/hexo:/var/hexo \
     slyak/hexo hexo server
 ```
@@ -60,7 +60,7 @@ you will see:
 
 <img src="./assets/rsa_key.png" width="450">
 
-copy the key to github , hexo server will continue to start.
+copy the key to github , do not forget to click "Allow write access", hexo server will continue to start.
 
 <img src="./assets/rsa.png" width="450">
 
@@ -82,3 +82,9 @@ Expose ports:
 | 4000     | Hexo server port (if you use hexo's web server) |
 | 4001 | Webhook server port |
 
+
+### Useful links
+1. [Hexo themes](https://hexo.io/themes/)
+
+### Demo site
+1. [http://slyak.com](http://slyak.com)
