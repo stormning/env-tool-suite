@@ -22,11 +22,12 @@ That's all , all these things will be automatically done by this amazing docker 
 
 ## Run hex server
 ### Preparations
-1. Create a repository at github
+1. If you already have an blog based on hexo, that's ok ,use it . Otherwise create a repository at github, remember , keep your repository empty.
 2. Add webhook with payload url and secret
 <img src="./assets/webhook.png" width="450">
 
 ### Use nginx as web server
+nginx config, replace the command with your domain or ip
 ``` bash
 curl -Ls https://raw.githubusercontent.com/stormning/env-tool-suite/master/software/hexo/hexo.conf \
     | sed "s|slyak.com|yourdomain|g" > /etc/nginx/conf.d/hexo.conf
