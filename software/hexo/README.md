@@ -30,7 +30,7 @@ That's all , all these things will be automatically done by this amazing docker 
 nginx config, replace the command with your domain or ip
 ``` bash
 curl -Ls https://raw.githubusercontent.com/stormning/env-tool-suite/master/software/hexo/hexo.conf \
-    | sed "s|slyak.com|yourdomain|g" > /etc/nginx/conf.d/hexo.conf
+    | sed "s|slyak.com|your_domain_or_ip|g" > /etc/nginx/conf.d/hexo.conf
 service nginx restart
 ```
 ``` bash
