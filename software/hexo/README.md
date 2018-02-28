@@ -1,5 +1,8 @@
 # slyak/hexo
 
+## Chinese Document
+[中文版说明点我](http://slyak.com/2018/02/26/slyak-hexo/)
+
 ## Architecture
 
 <img src="./assets/hexo.png" width="450">
