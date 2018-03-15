@@ -15,21 +15,17 @@ ENV X_PATH         jira
 # directory structure.
 ADD atlassian-crowd-${CROWD_VERSION}.tar /
 RUN mkdir -p /opt/atlassian \
-    && mv /atlassian-crowd-${CROWD_VERSION} ${CROWD_INSTALL}
-
-RUN rm -f ${CROWD_WEB_LIB}/atlassian-extras-3.2.jar
+    && mv /atlassian-crowd-${CROWD_VERSION} ${CROWD_INSTALL} \
+    && rm -f ${CROWD_WEB_LIB}/atlassian-extras-3.2.jar \
+    && mkdir -p "${CROWD_HOME}" \
+    && echo "\ncrowd.home=$CROWD_HOME" >> "${CROWD_WEB}/classes/crowd-init.properties" \
+    && chmod -R 700 "${CROWD_INSTALL}" \
+    && chown -R 700 "${CROWD_HOME}"
 
 #conf crack
 COPY atlassian-extras-3.2.jar ${CROWD_WEB_LIB}/
-
 #mysql
 COPY mysql-connector-java-5.1.39.jar ${CROWD_INSTALL}/apache-tomcat/lib/
-
-RUN mkdir -p "${CROWD_HOME}" \
-  && echo "\ncrowd.home=$CROWD_HOME" >> "${CROWD_WEB}/classes/crowd-init.properties" \
-  && chmod -R 700 "${CROWD_INSTALL}" \
-  && chown -R 700 "${CROWD_HOME}"
-
 
 VOLUME ["/var/atlassian/crowd"]
 
