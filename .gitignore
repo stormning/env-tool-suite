@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.rpm
 
 # Logs and databases #
 ######################
