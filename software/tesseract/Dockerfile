@@ -20,7 +20,7 @@ RUN set -x \
         libtool \
         zlib1g-dev \
         && unzip /tesseract-3.05.zip \
-        && rm /tesseract-3.05.zip
+        && rm /tesseract-3.05.zip \
         && cd /tesseract-3.05 \
         && ./autogen.sh \
         && ./configure \
