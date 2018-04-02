@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim-stretch
+FROM openjdk:8-slim-stretch
 ENV LANG C.UTF-8
 #debain加速
 #xmlstarlet for xml replacement

@@ -12,6 +12,7 @@ RUN set -x \
         libleptonica-dev \
         pkg-config \
         libpango1.0-dev \
+        git \
         && unzip /tesseract-3.05.zip \
         && rm /tesseract-3.05.zip \
         && cd /tesseract-3.05 \
