@@ -1,4 +1,4 @@
-FROM slyak/common
+FROM slyak/common-openjdk
 ENV  FISHEYE_HOME /var/atlassian/fisheye
 ENV  FISHEYE_INST /opt/atlassian/fisheye
 ENV  FISHEYE_VERSION 4.4.2

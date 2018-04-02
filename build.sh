@@ -5,10 +5,12 @@ function buildByName (){
 
 function buildAll (){
     buildByName 'common'
+    buildByName 'common-openjdk'
     for file in ./software/*
     do
         imgName=$(basename $file)
-        if [ $imgName != 'common' ]; then
+        result=$(echo $imgName | grep "common")
+        if [[ $result ]]; then
             buildByName $imgName
         fi
     done
