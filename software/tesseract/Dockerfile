@@ -27,4 +27,3 @@ COPY chi_sim.traineddata /usr/local/share/tessdata/
 COPY eng.traineddata /usr/local/share/tessdata/
 
 VOLUME ["/usr/local/share/tessdata/"]
-ENTRYPOINT ['/docker-entrypoint.sh']
