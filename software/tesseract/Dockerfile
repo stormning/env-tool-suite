@@ -1,24 +1,17 @@
-FROM slyak/common
+FROM slyak/common-openjdk
 COPY tesseract-3.05.zip /
 COPY chi_sim.traineddata /usr/local/share/tessdata/
 COPY eng.traineddata /usr/local/share/tessdata/
 
 RUN set -x \
         && apt-get install -y --no-install-recommends \
-        autoconf \
+        autoconf-archive \
         automake \
-        build-essential \
-        ca-certificates \
-        curl \
-        git \
-        libcairo2-dev \
-        libicu-dev \
-        libleptonica-dev \
-        libpango1.0-dev \
-        libpng12-dev \
-        libtiff5-dev \
+        g++ \
         libtool \
-        zlib1g-dev \
+        libleptonica-dev \
+        pkg-config \
+        libpango1.0-dev \
         && unzip /tesseract-3.05.zip \
         && rm /tesseract-3.05.zip \
         && cd /tesseract-3.05 \
@@ -33,3 +26,5 @@ RUN set -x \
         && rm -rf /tesseract-3.05 /var/lib/apt/lists/*
 
 VOLUME ["/usr/local/share/tessdata/"]
+
+CMD ['/entrypoint.sh']
