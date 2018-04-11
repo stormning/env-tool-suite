@@ -5,7 +5,7 @@ function buildByName (){
 
 function buildAll (){
     buildByName 'common'
-    buildByName 'common-openjdk'
+    buildByName 'common-debain-openjdk'
     for file in ./software/*
     do
         imgName=$(basename $file)

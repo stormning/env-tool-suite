@@ -1,4 +1,4 @@
-FROM slyak/common-openjdk
+FROM slyak/common-debain-openjdk
 COPY tesseract-3.05.zip /
 RUN set -x \
         && apt-get install -y --no-install-recommends \

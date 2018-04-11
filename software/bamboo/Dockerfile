@@ -1,4 +1,4 @@
-FROM slyak/common-openjdk
+FROM slyak/common-debain-openjdk
 
 # Setup useful environment variables
 ENV BAMBOO_HOME     /var/atlassian/bamboo

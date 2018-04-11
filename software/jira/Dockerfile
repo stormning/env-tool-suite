@@ -1,4 +1,4 @@
-FROM slyak/common-openjdk
+FROM slyak/common-debain-openjdk
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
