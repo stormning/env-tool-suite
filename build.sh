@@ -4,7 +4,7 @@ function buildByName (){
 }
 
 function buildAll (){
-    buildByName 'common'
+    buildByName 'common-debain'
     buildByName 'common-debain-openjdk'
     for file in ./software/*
     do
