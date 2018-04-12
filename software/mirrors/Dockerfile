@@ -12,7 +12,7 @@ RUN set -x \
 ADD nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
-EXPOSE 81
+EXPOSE 1080
+EXPOSE 1081
 
 CMD ["nginx","-g","daemon off;"]
-
