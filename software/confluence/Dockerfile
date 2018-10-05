@@ -59,6 +59,7 @@ RUN mkdir -p                   "${CONF_HOME}" \
         --delete               "Server/Service/Engine/Host/Context/@debug" \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
+    && rm -rf /var/lib/apt/lists/*
 
 # Expose default HTTP connector port.
 EXPOSE 8090

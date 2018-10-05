@@ -32,7 +32,8 @@ ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80
 ENV X_PATH         /bitbucket
 
-RUN mkdir -p                  "${BITBUCKET_HOME}/lib" \
+RUN apt-get install -y git \
+    && mkdir -p               "${BITBUCKET_HOME}/lib" \
     && chmod -R 700           "${BITBUCKET_HOME}" \
     && chown -R daemon:daemon "${BITBUCKET_HOME}" \
     && mkdir -p               "${BITBUCKET_INSTALL}" \
@@ -52,7 +53,8 @@ RUN mkdir -p                  "${BITBUCKET_HOME}/lib" \
         --delete              "Server/Service/Engine/Host/@xmlValidation" \
         --delete              "Server/Service/Engine/Host/@xmlNamespaceAware" \
                               "${BITBUCKET_INSTALL}/conf/server.xml" \
-    && touch -d "@0"          "${BITBUCKET_INSTALL}/conf/server.xml"
+    && touch -d "@0"          "${BITBUCKET_INSTALL}/conf/server.xml" \
+    && rm -rf /var/lib/apt/lists/*
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
