@@ -1,4 +1,4 @@
-FROM slyak/common-debain
+FROM hub.slyak.com/common-debain
 COPY nginx-1.9.2.tar.gz /
 COPY ngx_http_proxy_connect_module.zip /
 COPY "docker-entrypoint.sh" /
@@ -14,13 +14,14 @@ RUN set -x \
     && make && make install \
     && mkdir -p /var/log/nginx \
     && chmod -R 700 /var/log/nginx \
-    && touch /var/log/nginx/error.log
+    && touch /var/log/nginx/error.log \
+    && apt-get clean
+
 
 COPY nginx.conf.tmpl /usr/local/nginx/conf/nginx.conf.tmpl
-#/usr/local/nginx/conf/nginx.conf
+#/usr/local/nginx/conf/mirrors.conf
 #/usr/local/nginx/html
 #
-COPY proxy.conf /etc/nginx/conf.d/
 VOLUME ["/usr/local/nginx/html","/etc/nginx/conf.d"]
 EXPOSE 80
 

@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
@@ -19,20 +19,16 @@ COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 #jira crack
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
 
-#crowd sso
+#sso
 ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80
 ENV X_PATH         /jira
-ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
-
-COPY crowd/conf/crowd.properties.tmpl  ${JIRA_WEB}/classes/
-COPY crowd/conf/crowd-ehcache.xml ${JIRA_WEB}/classes/
-COPY seraph-config.xml ${JIRA_WEB}/classes/
 
 RUN  rm "${JIRA_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.21.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${JIRA_WEB}/atlassian-bundled-plugins/
 
-RUN mkdir -p                   "${JIRA_HOME}" \
+RUN rm -rf /var/lib/apt/lists/* \
+    && mkdir -p                "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
     && chmod -R 700            "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_INSTALL}/conf/Catalina" \

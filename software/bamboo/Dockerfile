@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 
 # Setup useful environment variables
 ENV BAMBOO_HOME     /var/atlassian/bamboo
@@ -23,11 +23,16 @@ COPY atlassian-extras-legacy-3.3.0.jar ${BAMBOO_WEB_LIB}/
 RUN  rm "${BAMBOO_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BAMBOO_WEB}/atlassian-bundled-plugins/
 
+#sso
+ENV X_PROXY_NAME   dev.slyak.com
+ENV X_PROXY_PORT   80
+ENV X_PATH         /bamboo
+
 RUN set -x \
     && curl --silent https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
     && apt-get install --quiet --yes --no-install-recommends git-lfs \
-    && git lfs install
-RUN rm -rf /var/lib/apt/lists/* \
+    && git lfs install \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p               "${BAMBOO_HOME}/lib" \
     && chmod -R 700           "${BAMBOO_HOME}" \
     && chown -R daemon:daemon "${BAMBOO_HOME}" \

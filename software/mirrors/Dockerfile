@@ -1,18 +1,11 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/nginx-proxy
 MAINTAINER stormning <stormning@163.com>
-
-RUN set -x \
- && apt-get install -y nginx \
- && mkdir /repo \
- && mkdir -p /logs/nginx \
- && apt-get clean
 
 #TODO add WEBUI to manage it
 
-ADD nginx.conf /etc/nginx/nginx.conf
+ADD mirrors.conf /etc/nginx/conf.d/mirrors.conf
 
 EXPOSE 80
-EXPOSE 1080
-EXPOSE 1081
+EXPOSE 3128
 
-CMD ["nginx","-g","daemon off;"]
+CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]

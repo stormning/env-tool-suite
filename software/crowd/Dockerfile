@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 
 # Setup useful environment variables
 ENV CROWD_HOME     /var/atlassian/crowd
@@ -9,12 +9,13 @@ ENV CROWD_VERSION  3.0.1
 
 ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80
-ENV X_PATH         jira
+ENV X_PATH         /crowd
 
 # Install Atlassian crowd and hepler tools and setup initial home
 # directory structure.
 ADD atlassian-crowd-${CROWD_VERSION}.tar /
-RUN mkdir -p /opt/atlassian \
+RUN rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /opt/atlassian \
     && mv /atlassian-crowd-${CROWD_VERSION} ${CROWD_INSTALL} \
     && rm -f ${CROWD_WEB_LIB}/atlassian-extras-3.2.jar \
     && mkdir -p "${CROWD_HOME}" \

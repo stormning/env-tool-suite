@@ -1,4 +1,4 @@
-FROM slyak/common-centos
+FROM hub.slyak.com/common-centos
 MAINTAINER stormning <stormning@163.com>
 
 RUN set -x \

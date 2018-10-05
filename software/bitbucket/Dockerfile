@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 
 # Setup useful environment variables
 ENV BITBUCKET_HOME     /var/atlassian/bitbucket
@@ -26,6 +26,11 @@ COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BITBUCKET_WEB}/atlassi
 
 #language
 COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
+
+#sso
+ENV X_PROXY_NAME   dev.slyak.com
+ENV X_PROXY_PORT   80
+ENV X_PATH         /bitbucket
 
 RUN mkdir -p                  "${BITBUCKET_HOME}/lib" \
     && chmod -R 700           "${BITBUCKET_HOME}" \

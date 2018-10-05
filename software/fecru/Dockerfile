@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 ENV  FISHEYE_HOME /var/atlassian/fisheye
 ENV  FISHEYE_INST /opt/atlassian/fisheye
 ENV  FISHEYE_VERSION 4.4.2
@@ -6,6 +6,11 @@ ENV  FISHEYE_VERSION 4.4.2
 ENV UID fisheye
 ENV GID atlassian
 ENV LANG C.UTF-8
+
+#sso
+ENV X_PROXY_NAME   dev.slyak.com
+ENV X_PROXY_PORT   80
+ENV X_PATH         /fecru
 
 # TODO The Universal Plugin Manager (v2.21.5)
 

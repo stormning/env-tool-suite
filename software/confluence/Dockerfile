@@ -1,4 +1,4 @@
-FROM slyak/common-debain-openjdk
+FROM hub.slyak.com/common-debain-openjdk
 
 # Setup useful environment variables
 ENV CONF_HOME     /var/atlassian/confluence
@@ -18,8 +18,6 @@ RUN mkdir -p /opt/atlassian \
 
 #copy fonts
 ADD Fonts.zip /
-RUN unzip -q Fonts.zip && mv Fonts /usr/share/fonts/truetype/msttcorefonts && rm -f Fonts.zip
-
 #setenv
 COPY setenv.sh ${CONF_INSTALL}/bin/
 
@@ -28,19 +26,18 @@ COPY mysql-connector-java-5.1.39.jar ${CONF_WEB_LIB}/
 
 #conf crack
 COPY atlassian-extras-decoder-v2-3.2.jar ${CONF_WEB_LIB}/
-RUN  rm "${CONF_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar"
 COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${CONF_WEB}/atlassian-bundled-plugins/
 
-#crowd sso
+#sso
 ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80
 ENV X_PATH         /confluence
-ENV CROWD_BASE_URL http://${X_PROXY_NAME}/crowd
-
-COPY crowd/conf/crowd.properties.tmpl  ${CONF_WEB}/classes/
-COPY seraph-config.xml ${CONF_WEB}/classes/
 
 RUN mkdir -p                   "${CONF_HOME}" \
+    && rm "${CONF_WEB}/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-2.22.1.jar" \
+    && unzip -q                Fonts.zip \
+    && mv /Fonts               /usr/share/fonts/truetype/msttcorefonts \
+    && rm -f                   /Fonts.zip \
     && chmod -R 700            "${CONF_HOME}" \
     && mkdir -p                "${CONF_INSTALL}/conf" \
     && chmod -R 700            "${CONF_INSTALL}/conf" \

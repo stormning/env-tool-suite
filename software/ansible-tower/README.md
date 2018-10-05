@@ -1,0 +1,1 @@
+docker build --no-cache --squash -t ansible-tower:${TOWER_VERSION} .
