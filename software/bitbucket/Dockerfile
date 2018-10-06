@@ -27,6 +27,9 @@ COPY atlassian-universal-plugin-manager-plugin-2.22.jar ${BITBUCKET_WEB}/atlassi
 #language
 COPY bitbucket-language-pack-zh_CN-4.10.0-rc7.jar ${BITBUCKET_WEB}/atlassian-bundled-plugins/
 
+#setenv
+COPY setenv.sh /opt/atlassian/bitbucket/bin/
+
 #sso
 ENV X_PROXY_NAME   dev.slyak.com
 ENV X_PROXY_PORT   80

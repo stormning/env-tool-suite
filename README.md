@@ -66,5 +66,19 @@
     * jira重装时启动报错？
         * rm /var/atlassian/jira/.jira-home.lock
         * rm -fr /var/atlassian/jira/caches
+        * Unable to create a tracker when osgi is not running
+        * WEB-INF/web.xml注释掉以下：
+            <filter>
+                <filter-name>prevent-ie-accept-css-vulnerability</filter-name>
+                <filter-class>com.atlassian.jira.web.filters.XContentTypeOptionsNoSniffFilter</filter-class>
+            </filter>
+    * Bitbucket Server should not start if the SSH plugin doesn't load
+        * https://jira.atlassian.com/browse/BSERV-8345
+        * 删除
+        $BITBUCKET_HOME/plugins/.bundled-plugins/
+        $BITBUCKET_HOME/plugins/.osgi-cache
+        * bin/setenv.sh 添加启动参数
+        JVM_SUPPORT_RECOMMENDED_ARGS="-Djava.security.egd=file:/dev/./urandom"
+        
         
         
