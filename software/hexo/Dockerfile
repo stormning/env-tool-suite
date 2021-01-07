@@ -1,4 +1,4 @@
-FROM node:9
+FROM node:10
 ENV HEXO_HOME /var/hexo
 ENV GIT_URL ''
 ENV GIT_ACCOUNT ''
